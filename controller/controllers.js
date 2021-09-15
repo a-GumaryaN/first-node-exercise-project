@@ -1,3 +1,4 @@
+const log = console.log;
 //defining path module
 const path = require('path').join;
 //define about page methode
@@ -22,31 +23,46 @@ exports.myAccount = (req, res) => {
 }
 
 
-const productBaner = [{
-        name: 'galaxy-s10-plus',
-        src: './assets/images/products/galaxy-s10-plus_gallery-color_s10-plus-c1-01.webp',
-        category: 'smart phone'
-    },
-    {
-        name: 'Xiaomi-Redmi-Note-8',
-        src: './assets/images/products/Xiaomi-Redmi-Note-8-6-3-Inch-6GB-128GB-Smartphone-White-876037-.jpg',
-        category: 'smart phone'
-    }
-];
+// const productBaner = [{
+//         name: 'galaxy-s10-plus',
+//         src: './assets/images/products/galaxy-s10-plus_gallery-color_s10-plus-c1-01.webp',
+//         category: 'smart phone'
+//     },
+//     {
+//         name: 'Xiaomi-Redmi-Note-8',
+//         src: './assets/images/products/Xiaomi-Redmi-Note-8-6-3-Inch-6GB-128GB-Smartphone-White-876037-.jpg',
+//         category: 'smart phone',
+//     }
+// ];
+
+
 
 const db = require("../modules/mongodb");
 
-
 //define my-account page methode
 exports.home = (req, res) => {
-    
-    db.find("mongodb://localhost:27017/electro", {}).then((result) => {
+    const url = "mongodb://localhost:27017/electro";
+    db.find(url, 'product').then((result) => {
         res.render(path(__dirname, '../public', 'home-v3-full-color.ejs'), {
             productBaner: result
         });
     });
+};
 
-}
+
+
+
+//  db.insert(url, 'product', [phone1]).then((result) => {
+//      log(result);
+//      res.send(result);
+//  })
+
+// db.delete("mongodb://localhost:27017/electro", 'product', {
+//     name: 'Xiaomi-Redmi-Note-8'
+// }).then((result) => {
+
+// });
+
 
 
 
