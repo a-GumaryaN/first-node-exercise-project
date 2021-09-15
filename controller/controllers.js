@@ -34,12 +34,18 @@ const productBaner = [{
     }
 ];
 
+const db = require("../modules/mongodb");
+
 
 //define my-account page methode
 exports.home = (req, res) => {
-    res.render(path(__dirname, '../public', 'home-v3-full-color.ejs'), {
-        productBaner: productBaner
+    
+    db.find("mongodb://localhost:27017/electro", {}).then((result) => {
+        res.render(path(__dirname, '../public', 'home-v3-full-color.ejs'), {
+            productBaner: result
+        });
     });
+
 }
 
 

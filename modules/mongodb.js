@@ -1,30 +1,73 @@
-const mongodb = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017/';
-const fs = require('fs');
+const MongoClient = require('mongodb').MongoClient;
 
-mongodb.connect(url, (err, db) => {
-    if (err) throw err
-    else {
-        console.log(`connected to the database successfully !!!`);
+var url = "mongodb://localhost:27017/electro";
 
-        const dbo = db.db('shoping');
-
-        fs.readFileSync('../public/assets/images/galaxy-s10-plus_gallery-color_s10-plus-c1-01.webp', (err, data) => {
+exports.find = (url = "mongodb://localhost:27017/mydb", findObject = {}) => {
+    return new Promise((resolve, reject) => {
+        MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             else {
-                dbo.collection('person').insertOne({
-                    name: 'image1',
-                    data:data
-                }, (err, result) => {
-                    if (err) throw err
+                console.log('connected to yhe database successfully !!!')
+                const dbo = db.db();
+                dbo.collection('product').find(findObject).toArray((err, res) => {
+                    if (err) reject(err);
                     else {
-                        console.log(result.ops);
+                        resolve(res);
                     }
                 });
+                db.close();
             }
         });
+    });
+};
 
 
-        db.close();
-    }
-});
+// const phone1 = {
+//     name: 'galaxy-s10-plus',
+//     company: 'Samsung',
+//     price: '16,000,000',
+//     category: 'smart phones',
+//     src: 'galaxy-s10-plus_gallery-color_s10-plus-c1-01.webp',
+// };
+
+// MongoClient.connect(url, function (err, db) {
+//     if (err) throw err;
+//     else {
+//         console.log('connected to yhe database successfully !!!')
+//         const dbo = db.db();
+//         dbo.collection('product').insertOne(phone1, (err, res) => {
+//             if (err) throw (err);
+//             else {
+//                 console.log(res);
+//             }
+//         });
+//         db.close();
+//     }
+// });
+
+
+
+
+//create collection
+
+// dbo.createCollection('product',(err,res)=>{
+//     if (err) throw err;
+//     console.log("Collection created!");
+// });
+
+//insert one object
+
+// const phone1 = {
+//     name: 'Xiaomi-Redmi-Note-8',
+//     company: 'Xiaomi',
+//     price: '9,000,000',
+//     category: 'smart phones',
+//     src: './assets/images/products/Xiaomi-Redmi-Note-8-6-3-Inch-6GB-128GB-Smartphone-White-876037-.jpg',
+// };
+
+// dbo.collection('product').insertOne(phone1, (err, res) => {
+//     if (err) throw err;
+//     else {
+//         console.log(res.ops);
+//     }
+// });

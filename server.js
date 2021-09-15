@@ -1,18 +1,22 @@
-//defining express module
+//declare express module
 const express = require('express');
-//defining app variable from express methode
+//declare app variable from express methode
 const app = express();
-//defining http module
+//declare http module
 const http = require('http');
-//defining path module
+//declare path module
 const path=require('path').join;
-//defining port
+//declare port
 const port =process.env.port || 3000;
-//defining server object to run server
+//declare server object to run server
 const server = http.Server(app);
-//defining console.log abbreviation
+//declare console.log abbreviation
 const log=console.log;
-//defining bodyparser module
+//declare mongodb module
+const MongoClient = require('mongodb').MongoClient;
+//declare mongodb url
+const url = "mongodb://localhost:27017/electro";
+//declare bodyparser module
 const bodyParser = require('body-parser');
 //define bodyParser for app
 app.use(bodyParser.urlencoded({extended:false}));
@@ -20,9 +24,9 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path('./public')));
 //deining router module
 const router=require('./routes/routes');
-//defining routes object for app
+//declare routes object for app
 app.use(router);
-//defining ejs as view engine
+//declare ejs as view engine
 app.set({
     'view engine': 'ejs'
 });
