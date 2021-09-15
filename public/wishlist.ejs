@@ -47,95 +47,40 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td class="product-remove">
-                                            <div>
-                                                <a title="Remove this product" class="remove remove_from_wishlist"
-                                                    href="#">×</a>
-                                            </div>
-                                        </td>
 
-                                        <td class="product-thumbnail">
-                                            <a href="single-product.html"><img width="180" height="180" alt="1"
-                                                    class="wp-post-image" src="assets/images/products/2.jpg"></a>
-                                        </td>
+                                    <%
+                                    let product = [{
+                                    name: "galaxy-s10-plus",
+                                    src: "./assets/images/galaxy-s10-plus_gallery-color_s10-plus-c1-01.webp"
+                                    },
+                                    {
+                                    name: "galaxy-z-fold2-m",
+                                    src: "./assets/images/z-fold2-m.jpg"
+                                    }
+                                    ];
+                                    %>
 
-                                        <td class="product-name">
-                                            <a href="single-product.html">White Solo 2 Wireless</a>
-                                        </td>
-
-                                        <td class="product-price">
-                                            <span class="electro-price"><span class="amount">$248.99</span></span>
-                                        </td>
-
-                                        <td class="product-stock-status">
-                                            <span class="in-stock">In stock</span>
-                                        </td>
-
-                                        <td class="product-add-to-cart">
-                                            <!-- Date added -->
-
-                                            <!-- Add to cart button -->
-                                            <a href="#" class="button"> Add to Cart</a>
-                                            <!-- Change wishlist -->
-
-                                            <!-- Remove from wishlist -->
-                                        </td>
-                                    </tr>
+                                    <% for (let i = 0; i < product.length ; i++) { %>
+                                   
                                     <tr>
 
                                         <td class="product-remove">
                                             <div>
-                                                <a title="Remove this product" class="remove remove_from_wishlist"
-                                                    href="#">×</a>
-                                            </div>
-                                        </td>
-
-                                        <td class="product-thumbnail">
-                                            <a href="single-product.html"><img width="180" height="180" alt="Ultrabooks"
-                                                    class="wp-post-image" src="assets/images/products/3.jpg"></a>
-                                        </td>
-
-                                        <td class="product-name">
-                                            <a href="single-product.html">Tablet Red EliteBook Revolve 810 G2</a>
-                                        </td>
-
-                                        <td class="product-price">
-                                            <span class="electro-price"><span class="amount">$1200.00</span></span>
-                                        </td>
-
-                                        <td class="product-stock-status">
-                                            <span class="in-stock">In stock</span>
-                                        </td>
-
-                                        <td class="product-add-to-cart">
-                                            <!-- Date added -->
-
-                                            <!-- Add to cart button -->
-
-                                            <a href="#" class="button"> Add to Cart</a>
-                                            <!-- Change wishlist -->
-
-                                            <!-- Remove from wishlist -->
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td class="product-remove">
-                                            <div>
-                                                <a title="Remove this product" class="remove remove_from_wishlist"
-                                                    href="#">×</a>
+                                                <span onclick="alert('pass');delete product[i]" title="Remove this product"
+                                                    class="remove remove_from_wishlist"
+                                                    >×</span>
                                             </div>
                                         </td>
 
                                         <td class="product-thumbnail">
                                             <a href="single-product.html"><img width="180" height="180"
                                                     alt="GameStation" class=" wp-post-image"
-                                                    src="assets/images/products/1.jpg"></a>
+                                                    src="<%= product[i].src  %>"></a>
                                         </td>
 
                                         <td class="product-name">
-                                            <a href="single-product.html">GameConsole Destiny Special Edition</a>
+                                            <a
+                                                href="single-product.html"><%= product[i].name  %></a>
                                         </td>
 
                                         <td class="product-price">
@@ -156,6 +101,11 @@
                                             <!-- Remove from wishlist -->
                                         </td>
                                     </tr>
+
+                                    <% } %>
+
+
+
                                 </tbody>
 
                                 <tfoot>
