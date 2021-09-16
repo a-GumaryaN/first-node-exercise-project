@@ -5,7 +5,7 @@ const path=require('path').join;
 //defining router object
 const router=express.Router();
 
-const controller=require('../controller/controllers.js');
+const controller=require('../controller/client.js');
 
 router.get('/', controller.home);
 
@@ -22,6 +22,8 @@ router.get('/shop-fw', controller.shopFw);
 router.get('/product-category', controller.productCategory);
 
 router.get('/my-account', controller.myAccount);
+
+router.post('/client-login', controller.clientLogin);
 
 router.get('/faq', controller.faq);
 

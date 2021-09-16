@@ -23,9 +23,17 @@ app.use(bodyParser.urlencoded({extended:false}));
 //define public folder for express
 app.use(express.static(path('./public')));
 //deining router module
-const router=require('./routes/routes');
+const clientRoutes = require('./routes/clientRoutes');
+
+const adminRoutes = require('./routes/adminRoutes');
+
 //declare routes object for app
-app.use(router);
+app.use(clientRoutes);
+
+// app.use(adminRoutes);
+
+
+
 //declare ejs as view engine
 app.set({
     'view engine': 'ejs'
@@ -36,7 +44,7 @@ app.set({
 })
 //add 404 page
 app.use('', (req, res) => {
-    res.render(path(__dirname,'public/404.ejs'));
+    res.render(path(__dirname,'public','views','404.ejs'));
 });
 
 

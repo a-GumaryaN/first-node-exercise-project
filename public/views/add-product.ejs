@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="./assets/css/admin-style.css">
+    </head>
+
+    <body>
+
+        <header>
+            <ul>
+                <li onclick="menuDisplay()" class="header-li">
+                    add product
+                </li>
+                <li>
+                    product list
+                    <select default="" name="" id="" onchange="productList(this.value)">
+                        <option value="tablet">
+                            Tablet
+                        </option>
+                        <option value="smart phone">
+                            Smart Phones
+                        </option>
+                        <option value="smart phone">
+                            Laptops
+                        </option>
+                    </select>
+                </li>
+            </ul>
+            <h3 class="header-title">
+                admin pannel
+            </h3>
+        </header>
+
+        <form id="menu" style="display:none;" method="POST" class="add-product-menu"
+            action="http://localhost:3000/add-product">
+            <section class="input-section">
+                <input class="input" type="text" placeholder="product name" id="productName">
+                <input class="input" type="text" placeholder="product price" id="productPrice">
+            </section>
+            <section class="input-section">
+                <select class="product-category-select" name="category" id="productCategory">
+                    <option value="tablet">
+                        Tablet
+                    </option>
+                    <option value="smart phones">
+                        Smart Phones
+                    </option>
+                    <option value="smart phones">
+                        Laptops
+                    </option>
+                </select>
+                <input class="input" type="text" placeholder="company" id="productCompany">
+            </section>
+            <section class="input-section">
+                <input class="input" type="file">
+            </section>
+            <section class="input-section">
+                <input class="input" type="submit" value="add">
+            </section>
+        </form>
+
+        <section id="product">
+
+        </section>
+
+    </body>
+
+    <script>
+        // document.getElementById('dis')='asd';
+        const menuDisplay = () => {
+            const menu = document.getElementById('menu');
+            if (menu.style.display === "none") {
+                menu.style.display = "block"
+            } else {
+                menu.style.display = "none"
+            }
+        }
+        const productList = (value) => {
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('GET', 'http://localhost:3000/get-product?category=' + value, true);
+            xhttp.send();
+            xhttp.onload = function () {
+
+                document.getElementById('product').innerHTML = '';
+
+                var jsonResponse = JSON.parse(this.responseText);
+
+                for (let product of jsonResponse) {
+
+                    document.getElementById('product').innerHTML +=
+                        `<section class="product-box">
+                        <img src="${ product.src }" alt="">
+                        <p class="data">name : ${ product.name }</p>
+                        <p class="data">price : ${ product.price }</p>
+                        <p class="data">category : ${product.category }</p>
+                        <p class="data">company : ${ product.company}</p>
+                        <p class="data">src : ${ product.src }</p>
+                    </section>`;
+                }
+
+            };
+
+        }
+    </script>
+
+</html>

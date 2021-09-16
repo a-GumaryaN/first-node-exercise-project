@@ -1,0 +1,17 @@
+project
+     client
+         404 page =>ok
+         home page --> to do
+         register
+         sing-up
+         shop-basket
+         blog
+         about-us
+         product-category
+                      shop.ejs
+                             single-product.ejs
+         FAQ
+     admin
+         add-product
+         update-product
+         delete-product
